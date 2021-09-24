@@ -2,7 +2,7 @@
 title: "p8105_hw1_yo2336"
 author: "Yoo Rim Oh"
 date: "9/23/2021"
-output: html_document
+output: github_document
 ---
 
 ```{r setup, include = FALSE}
