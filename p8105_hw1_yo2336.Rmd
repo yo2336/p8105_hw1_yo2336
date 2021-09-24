@@ -1,0 +1,74 @@
+---
+title: "p8105_hw1_yo2336"
+author: "Yoo Rim Oh"
+date: "9/23/2021"
+output: html_document
+---
+
+```{r setup, include = FALSE}
+library(tidyverse)
+```
+ 
+## Problem 1
+
+```{r}
+hw_df = tibble(
+  vec_rnorm = rnorm(10),
+  vec_logical = vec_rnorm > 0,
+  vec_char = c("A","B","C","D","E","F","G","H","I","J"),
+  vec_factor = factor(c("small", "small","large","medium","large","small","medium","small","large","large"))
+)
+```
+
+# Mean of each variables
+only vec_rnorm and vec_logical able to generate mean
+```{r}
+mean(pull(hw_df, vec_rnorm))
+
+mean(pull(hw_df, vec_logical))
+
+mean(pull(hw_df, vec_char))
+
+mean(pull(hw_df, vec_factor))
+```
+
+
+
+# as.numeric function applied to variables
+vec_logical and vec_factor converted into numerical form but not vec_char
+```{r, eval = FALSE}
+as.numeric(pull(hw_df, vec_logical))
+
+as.numeric(pull(hw_df, vec_char))
+
+as.numeric(pull(hw_df, vec_factor))
+```
+
+
+
+## Problem 2
+
+```{r}
+data("penguins", package = "palmerpenguins")
+```
+
+Penguin Data Description
+```{r}
+summary(penguins)
+
+nrow(penguins)
+ncol(penguins)
+
+mean(pull(penguins, flipper_length_mm), na.rm = TRUE)
+```
+
+
+
+scatter plot
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
+
+
+ggsave("penguin_scatter_plot.pdf", height = 4, width = 4)
+```
+
