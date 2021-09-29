@@ -13,11 +13,12 @@ library(tidyverse)
 
 ## Create data frame
 
-data frame created using tibble named hw_df 
-with numerical vector from Normal distribution (vec_rnorm),
-logical vector indicating if each elements of numerical vector are > 0 (vec_logical),
-character vector assigned from A to J (vec_char),
+data frame created using tibble named hw_df  
+with numerical vector from Normal distribution (vec_rnorm), 
+logical vector indicating if each elements of numerical vector are > 0 (vec_logical), 
+character vector assigned from A to J (vec_char), 
 and factor vector with 3 levels: small, medium, and large (vec_factor)
+
 
 set.seed used for reproducibility, generating only one random sample for vec_rnorm each time code ran
 
