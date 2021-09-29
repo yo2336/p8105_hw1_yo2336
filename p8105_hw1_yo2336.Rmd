@@ -13,13 +13,13 @@ library(tidyverse)
 
 ## Create data frame
 
-data frame named hw_df 
-with numerical vector from Normal distribution,
-logical vector indicating if each elements of numerical vector > 0,
-character vector named from A to J,
-and factor vector with 3 levels: small, medium, and large
+data frame created using tibble named hw_df 
+with numerical vector from Normal distribution (vec_rnorm),
+logical vector indicating if each elements of numerical vector are > 0 (vec_logical),
+character vector assigned from A to J (vec_char),
+and factor vector with 3 levels: small, medium, and large (vec_factor)
 
-set.seed used for reproducibility 
+set.seed used for reproducibility, generating only one random sample for vec_rnorm each time code ran
 
 ```{r}
 set.seed(10)
@@ -28,14 +28,17 @@ hw_df = tibble(
   vec_rnorm = rnorm(10),
   vec_logical = vec_rnorm > 0,
   vec_char = c("A","B","C","D","E","F","G","H","I","J"),
-  vec_factor = factor(c("small", "small","large","medium","large","small","medium","small","large","large"))
+  vec_factor = factor(c("small", "small","large","medium","large",
+                        "small","medium","small","large","large"))
 )
 ```
 
 ## Means of each variables
 
+pulled each vector at a time from data frame (hw_df) to compute mean.
 
-only the numerical vector from Normal distribution (vec_rnorm) and logical vector (vec_logical) able to generate mean
+only the numerical vector from Normal distribution (vec_rnorm) and 
+logical vector (vec_logical) able to generate mean.
 
 ```{r}
 mean(pull(hw_df, vec_rnorm))
@@ -52,7 +55,7 @@ mean(pull(hw_df, vec_factor))
 ## as.numeric function applied to variables
 
 
-vec_logical and vec_factor converted into numerical form but not vec_char
+vec_logical and vec_factor converted into numerical form but not vec_char.
 
 ```{r, eval = FALSE}
 as.numeric(pull(hw_df, vec_logical))
@@ -61,6 +64,12 @@ as.numeric(pull(hw_df, vec_char))
 
 as.numeric(pull(hw_df, vec_factor))
 ```
+
+Each components of vec_logical converted into numerical form, 1 = True and 0 = False. 
+True if the numerical values of vec_rnorm are > 0.
+
+Each ordinal levels of vec_factor also converted into numerical form, 
+1 = large, 2 = medium, and 3 = small.
 
 
 
@@ -77,6 +86,9 @@ data("penguins", package = "palmerpenguins")
 
 ## Penguin data description
 
+print() to see Penguins data.
+
+summary() to see brief description of data.
 
 ```{r}
 print(penguins)
@@ -88,6 +100,12 @@ ncol(penguins)
 mean(pull(penguins, flipper_length_mm), na.rm = TRUE)
 ```
 
+Penguins data has 8 columns indicating variables: species, island, bill_length_mm, bill_depth_mm, 
+flipper_length_mm, body_mass_g, sex, and year.
+It has 344 rows, representing 344 sets of data collected.
+
+pulled flipper_length_mm only from penguins data to compute mean.
+na.rm = TRUE used to exclude 2 missing data points for flipper_length_mm when computing mean.
 
 
 ## Scatter plot of Penguins and Export plot
@@ -100,3 +118,6 @@ ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)
 ggsave("penguin_scatter_plot.pdf", height = 4, width = 4)
 ```
 
+ggplot to create scatter plot (using geom_point()).
+
+ggsave to export plot into a pdf form.
